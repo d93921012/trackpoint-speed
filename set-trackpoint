@@ -1,0 +1,21 @@
+echo 'This needs pyusb and xinput' 
+
+#echo 1-1.5:1.1 > /sys/bus/usb/drivers/usbhid/unbind
+echo 3-13:1.1 > /sys/bus/usb/drivers/usbhid/unbind
+python trackpoint-script.py 
+#echo 1-1.5:1.1 > /sys/bus/usb/drivers/usbhid/bind
+echo 3-13:1.1 > /sys/bus/usb/drivers/usbhid/bind
+
+# xset m 10 1
+# delay a moment for waiting the device to ready
+sleep 0.1
+
+#xinput list
+
+# Logitech USB Receiver
+xinput --set-prop 11 'Device Accel Velocity Scaling' 3
+
+# ThinkPad USB Keyboard with TrackPoint
+# xinput --set-prop 9 'Device Accel Velocity Scaling' 10
+xinput --set-prop 9 'libinput Accel Speed' 0.999
+
